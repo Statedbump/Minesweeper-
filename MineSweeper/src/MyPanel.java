@@ -140,16 +140,9 @@ public class MyPanel extends JPanel {
 				numAdjMines[xMine][yMine] = -1;
 			}
 		}
-		minePos();
-		for (int i = 0; i < TOTAL_COLUMNS; i++) { //PAINTS ALL MINES; USE THIS BLOCK OF CODE FOR DEBUGGING
-			for (int k = 0; k < TOTAL_ROWS; k++) {
-				if(mines[i][k]) {
-					colorArray[i][k] = Color.BLACK;
-					repaint();
-				}
-			}
-		}
+		
 	}
+		
 	
 	public void minePos(){
 		for(int i = 0; i<TOTAL_COLUMNS; i++){
@@ -171,7 +164,15 @@ public class MyPanel extends JPanel {
 					if((i>= 0 && j >=0)&& mines[i-1][j-1]== true){
 						numAdjMines[i][j]+=1;
 					}
-						
+					if (i <= TOTAL_COLUMNS-2 && j >= 1 && mines[i+1][j-1] == true) {
+						numAdjMines[i][j] =+ 1;
+					}
+					if (i <= TOTAL_COLUMNS-2 && j <= TOTAL_ROWS-2 && mines[i+1][j+1] == true){ 
+						numAdjMines[i][j] =+ 1;
+					}
+					if (i >= 1 && j <= TOTAL_ROWS-2 && mines[i-1][j+1] == true) {
+						numAdjMines[i][j] =+ 1;
+					}
 				}
 				
 			}
