@@ -45,15 +45,15 @@ public class MyMouseAdapter extends MouseAdapter {
 			JFrame click = (JFrame)l;
 			MyPanel myRightPanel = (MyPanel) click.getContentPane().getComponent(0);  //Can also loop among components to find MyPanel
 			Insets myRightInsets = click.getInsets();
-			int cx1 = myRightInsets.left;
-			int cy1 = myRightInsets.top;
-			e.translatePoint(-cx1, -cy1);
-			int cx = e.getX();
-			int cy = e.getY();
-			myRightPanel.x = cx;
-			myRightPanel.y = cy;
-			myRightPanel.mouseDownGridX = myRightPanel.getGridX(cx, cy);
-			myRightPanel.mouseDownGridY = myRightPanel.getGridY(cx, cy);
+			x1 = myRightInsets.left;
+			y1 = myRightInsets.top;
+			e.translatePoint(-x1, -y1);
+			x = e.getX();
+			y = e.getY();
+			myRightPanel.x = x;
+			myRightPanel.y = y;
+			myRightPanel.mouseDownGridX = myRightPanel.getGridX(x, y);
+			myRightPanel.mouseDownGridY = myRightPanel.getGridY(x, y);
 
 			break;
 		default:
@@ -91,27 +91,30 @@ public class MyMouseAdapter extends MouseAdapter {
 					//Is releasing outside
 					//Do nothing
 				} else {
+					
 					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
-
 					} else {
-
+						
+						if(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.LIGHT_GRAY)){
+							//Here the color will stay red and will not change
+							break;
+						}
 						if(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED)){
 							//Here the color will stay red and will not change
 							break;
-
 						}
 						if(myPanel.mines[myPanel.mouseDownGridX][myPanel.mouseDownGridY]){
 							myPanel.gameOver();
-
 							break;
 						}
-
-
-						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY]= Color.GRAY;
+						myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY]= Color.LIGHT_GRAY;
 						myPanel.uncoveredCells[myPanel.mouseDownGridX][myPanel.mouseDownGridY]=true;
+						myPanel.paintNearCells(myPanel.mouseDownGridX, myPanel.mouseDownGridY);
+						myPanel.gameWon();//Verifies if the player won the game
 						myPanel.repaint();
+						
 
 					}
 				}
