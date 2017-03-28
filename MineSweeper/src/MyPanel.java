@@ -99,7 +99,7 @@ public class MyPanel extends JPanel {
 						for (int j = y-1; j <= y+1; j++){
 
 
-							if ( i < 0 || i > TOTAL_COLUMNS-1 || j < 0 || j >TOTAL_ROWS-2){
+							if ( i < 0 || i > TOTAL_COLUMNS-1 || j < 0 || j >TOTAL_ROWS-1){
 								//Do nothing: out of colorArray bounds
 
 							} else if (mines[i][j]){
