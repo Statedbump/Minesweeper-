@@ -109,7 +109,7 @@ public class MyPanel extends JPanel {
 					}
 				// Draws a number in a cell that is near a mine  8x8 around the cells
 					
-					xPos = x1 + GRID_X + (x * (INNER_CELL_SIZE )) + 12;
+					xPos = x1 + GRID_X + (x * (INNER_CELL_SIZE )) + 10;
 					yPos =  y1 + GRID_Y + (y * (INNER_CELL_SIZE )) + 20;
 					g.setColor(Color.WHITE);
 					switch (numMines) {
